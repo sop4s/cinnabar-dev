@@ -1,8 +1,6 @@
 ﻿using System;
-
 using Cinnabar.TUI;
 using Cinnabar.Controllers;
-
 using static System.Console;
 using static Cinnabar.Logs;
 
