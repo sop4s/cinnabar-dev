@@ -1,3 +1,4 @@
+using System;
 using static System.Console;
 
 namespace Cinnabar.TUI {
@@ -8,10 +9,18 @@ namespace Cinnabar.TUI {
     public string Select(string[] opts) {
       WriteLine("Select a option:");
       for (int i = 0; i < opts.Length; i++) {
-        WriteLine("\t[{0}] {1}", i, opts[i]);
+        Write("[");
+        ForegroundColor = ConsoleColor.Red;
+        Write(i);
+        ResetColor();
+        WriteLine("] {0}", opts[i]);
       }
-      Write("> ");
-      return opts[int.Parse(ReadLine())]; //fix later
+      Write(Environment.UserName + " > ");
+      int index;
+      if (!int.TryParse(ReadLine(), out index)) {
+        return opts[0];
+      }
+      return opts[index]; //fix later
     }
   }
 }
