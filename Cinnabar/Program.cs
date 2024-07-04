@@ -30,10 +30,11 @@ public class Program {
         Controller.Init();
         break;
       case "Client Controller":
-        
+        Controller = new ClientController();
+        Controller.Init();
         break;
       case "Bot Controller":
-        
+  
         break;
       default:  
         LogError("Unknown option");
