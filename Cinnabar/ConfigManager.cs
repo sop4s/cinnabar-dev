@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using static Cinnabar.Logs;
 
 namespace Cinnabar {
@@ -21,6 +22,14 @@ namespace Cinnabar {
         CheckDir(CinnabarConfigDir);
         CheckDir(WebhooksDir);
       }
+    }
+    public static string[] GetUserFiles() {
+      if (!Directory.Exists(WebhooksDir)) {
+        LogError("Webhook user folder not exists");
+        return new string[0];
+      }
+      string[] files = Directory.GetFiles(WebhooksDir);
+      return files.Where(x => x.EndsWith(".json")).ToArray();
     }
   }
 }
