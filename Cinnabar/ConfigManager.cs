@@ -16,7 +16,6 @@ namespace Cinnabar {
     }
     ///<summary>Creates .config/cinnabar/ dir if not exists</summary)>
     public static void MKConfigDir() {
-      Console.WriteLine(CinnabarConfigDir);
       if (!Directory.Exists(CinnabarConfigDir)) {
         LogInfo("Config dir does not exist: making one > " + CinnabarConfigDir);
         CheckDir(CinnabarConfigDir);

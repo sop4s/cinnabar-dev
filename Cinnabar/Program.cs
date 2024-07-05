@@ -6,8 +6,9 @@ using static Cinnabar.Logs;
 
 namespace Cinnabar {
   public class Program {
+    static readonly string VERSION = "0.1";
     static void SIGINT(object sender, ConsoleCancelEventArgs args) {
-      WriteLine("Program canceled by user");
+      LogInfo("Closing program");
     }
     static void Main() {
       CancelKeyPress += SIGINT;
@@ -15,16 +16,23 @@ namespace Cinnabar {
       IController controller = null;
       string selection;
 
-      WriteLine(Embedded.Banner);
+      ForegroundColor = ConsoleColor.Red;
+      WriteLine(Embedded.Banner
+          .Replace("{version}", VERSION)
+          .Replace("[", "\x1b[0m[\x1b[1;31m")
+          .Replace("]", "\x1b[0m]\x1b[0;31m")
+      );
+      ResetColor();
 
       ConfigManager.MKConfigDir();
-
+      
+      WriteLine("Select a mode:");
       selection = selector.Select( new string[] {
         "Webhook Manager",
         "Client Controller",
-        "Bot Controller"
+        "Bot Controller",
       });
-      WriteLine(selection);
+  
       switch (selection)
       {
         case "Webhook Manager":
