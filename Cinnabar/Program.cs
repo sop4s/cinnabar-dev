@@ -12,9 +12,8 @@ namespace Cinnabar {
     }
     static void Main() {
       CancelKeyPress += SIGINT;
-      OptionSelector selector = new OptionSelector();
+      OptionSelector selector;
       IController controller = null;
-      string selection;
 
       ForegroundColor = ConsoleColor.Red;
       WriteLine(Embedded.Banner
@@ -27,13 +26,14 @@ namespace Cinnabar {
       ConfigManager.MKConfigDir();
       
       WriteLine("Select a mode:");
-      selection = selector.Select( new string[] {
+      selector = new OptionSelector(new string[] {
         "Webhook Manager",
         "Client Controller",
         "Bot Controller",
+        "Exit"
       });
-  
-      switch (selection)
+      
+      switch (selector.Select())
       {
         case "Webhook Manager":
           controller = new WebhookController();
@@ -44,6 +44,8 @@ namespace Cinnabar {
           case "Bot Controller":
           controller = new BotController();
           break;
+        case "Exit":
+          return;
         default:  
           LogError("Unknown option");
           Environment.Exit(1);

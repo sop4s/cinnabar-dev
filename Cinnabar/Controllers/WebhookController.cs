@@ -1,3 +1,4 @@
+using System;
 using Cinnabar.TUI;
 using System.Net.Http;
 using static System.Console;
@@ -11,10 +12,29 @@ namespace Cinnabar.Controllers {
       Client = new HttpClient();
       WriteLine("Select a profile:");
       string[] userNames = ConfigManager.GetUserFiles();
-      for (int i = 0; i < userNames.Length; i++) {
-        userNames[i] = userNames[i].Split('/').Last().Replace(".json", string.Empty);
+      foreach (string name in userNames) {
+        Selector.Add(name.Split('/').Last().Replace(".json", string.Empty));
       }
-      string selection = Selector.Select(userNames);      
+      Selector.Add("Exit");
+      Selector.OnChange+= ((string opt) => {
+        string fill = new String('-', 15);
+        
+        WriteLine(fill);
+        WriteLine("Name: {0}{1}", opt, new String(' ', 15));
+        WriteLine("Avatar url: idk");
+        WriteLine("Etc: ...");
+        WriteLine(fill);
+      });
+      string selection = Selector.Select();
+      switch (selection) {
+        case "Exit":
+          Environment.Exit(0);
+          break;
+        default:
+          WriteLine("Abriendo usuario");
+          
+          break;
+      }
     }
     public void Dispose() {
       Client.Dispose();
