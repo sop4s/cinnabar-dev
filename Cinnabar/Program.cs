@@ -47,7 +47,7 @@ namespace Cinnabar {
         case "Exit":
           return;
         default:  
-          LogError("Unknown option");
+          LogError("Unknown option lol");
           Environment.Exit(1);
           break;
       }
