@@ -11,6 +11,7 @@ namespace Cinnabar {
       LogInfo("Closing program");
     }
     static void Main() {
+      Clear();
       CancelKeyPress += SIGINT;
       OptionSelector selector;
       IController controller = null;
