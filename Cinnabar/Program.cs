@@ -6,7 +6,7 @@ using static Cinnabar.Logs;
 
 namespace Cinnabar {
   public class Program {
-    static readonly string VERSION = "0.1";
+    static readonly string VERSION = "0.1 (In development)";
     static void SIGINT(object sender, ConsoleCancelEventArgs args) {
       LogInfo("Closing program");
     }
